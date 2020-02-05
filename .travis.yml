@@ -1,0 +1,17 @@
+dist: bionic
+
+language: node_js
+
+before_script:
+  - npm i -g gitbook-cli
+
+jobs:
+  include:
+    - stage: build
+      name: "Build docker"
+      script:
+        - cd docker/en && gitbook build
+    - stage: deploy
+      name: "Deploy docker"
+      script:
+        - cd docker/en && gitbook build
