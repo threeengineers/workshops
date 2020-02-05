@@ -23,8 +23,8 @@ jobs:
         - cd docker/en && gitbook build
     - stage: deploy
       name: "Deploy docker"
+      env: RELEASE_NAME=docker-en
       script:
-        - export RELEASE_NAME=docker-en
         - cd docker/en
         - gitbook build
         - mv _book $RELEASE_NAME
