@@ -23,5 +23,5 @@ jobs:
       script:
         - cd docker/en
         - gitbook build
-        - zip _book
+        - zip -r docker-en.zip _book
         - ls -alh
