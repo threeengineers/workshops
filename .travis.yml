@@ -18,18 +18,32 @@ install:
 jobs:
   include:
     - stage: build
-      name: "Build docker"
+      name: "Build docker for EN"
       script:
         - cd docker/en && gitbook build
+    - stage: build
+      name: "Build docker for ID"
+      script:
+        - cd docker/id && gitbook build
     - stage: deploy
-      name: "Deploy docker"
+      name: "Deploy docker material for EN"
       env:
         - LANG=en
         - TARGET_FOLDER="/var/www/html/workshop.threeengineers.id/docker"
       script:
-        - cd docker/en
-        - gitbook build
+        - cd docker/$LANG && gitbook build
         - mv _book $LANG
         - zip -r $LANG.zip $LANG
         - scp $LANG.zip $TARGET_SERVER:$TARGET_FOLDER
-        - ssh $TARGET_SERVER "cd $TARGET_FOLDER && unzip $LANG.zip"
+        - ssh $TARGET_SERVER "cd $TARGET_FOLDER && unzip $LANG.zip && rm -rf $LANG.zip"
+    - stage: deploy
+      name: "Deploy docker material for ID"
+      env:
+        - LANG=id
+        - TARGET_FOLDER="/var/www/html/workshop.threeengineers.id/docker"
+      script:
+        - cd docker/$LANG && gitbook build
+        - mv _book $LANG
+        - zip -r $LANG.zip $LANG
+        - scp $LANG.zip $TARGET_SERVER:$TARGET_FOLDER
+        - ssh $TARGET_SERVER "cd $TARGET_FOLDER && unzip $LANG.zip && rm -rf $LANG.zip"
