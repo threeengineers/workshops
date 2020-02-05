@@ -2,9 +2,10 @@ dist: bionic
 
 language: node_js
 
+node_js:
+- 12
+
 before_script:
-  - npm i -g n
-  - sudo n stable
   - npm i -g gitbook-cli
 
 jobs:
