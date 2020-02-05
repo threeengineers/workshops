@@ -24,8 +24,10 @@ jobs:
     - stage: deploy
       name: "Deploy docker"
       script:
+        - export RELEASE_NAME=docker-en
         - cd docker/en
         - gitbook build
-        - zip -r docker-en.zip _book
-        - scp docker-en.zip $TARGET_SERVER:/var/www/html/workshop.threeengineers.id
-        - ssh $TARGET_SERVER "cd /var/www/html/workshop.threeengineers.id && unzip docker-en.zip"
+        - mv _book $RELEASE_NAME
+        - zip -r $RELEASE_NAME.zip _book
+        - scp $RELEASE_NAME.zip $TARGET_SERVER:/var/www/html/workshop.threeengineers.id
+        - ssh $TARGET_SERVER "cd /var/www/html/workshop.threeengineers.id && unzip $RELEASE_NAME.zip"
