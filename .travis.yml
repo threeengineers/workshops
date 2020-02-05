@@ -4,7 +4,7 @@ language: node_js
 
 before_script:
   - npm i -g n
-  - n stable
+  - sudo n stable
   - npm i -g gitbook-cli
 
 jobs:
