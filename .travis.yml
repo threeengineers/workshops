@@ -28,6 +28,6 @@ jobs:
         - cd docker/en
         - gitbook build
         - mv _book $RELEASE_NAME
-        - zip -r $RELEASE_NAME.zip _book
+        - zip -r $RELEASE_NAME.zip $RELEASE_NAME
         - scp $RELEASE_NAME.zip $TARGET_SERVER:/var/www/html/workshop.threeengineers.id
         - ssh $TARGET_SERVER "cd /var/www/html/workshop.threeengineers.id && unzip $RELEASE_NAME.zip"
