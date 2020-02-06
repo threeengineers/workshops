@@ -47,3 +47,7 @@ jobs:
         - zip -r $LANG.zip $LANG
         - scp $LANG.zip $TARGET_SERVER:$TARGET_FOLDER
         - ssh $TARGET_SERVER "cd $TARGET_FOLDER && unzip $LANG.zip && rm -rf $LANG.zip"
+    - stage: deploy
+      name: "Clean zip"
+      script:
+        - ssh $TARGET_SERVER "cd $TARGET_FOLDER && rm -rf *.zip"
