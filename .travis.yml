@@ -49,5 +49,7 @@ jobs:
         - ssh $TARGET_SERVER "cd $TARGET_FOLDER && unzip -o $LANG.zip && rm -rf $LANG.zip"
     - stage: clean
       name: "Clean zip"
+      env:
+        - TARGET_FOLDER="/var/www/html/workshop.threeengineers.id/docker"
       script:
         - ssh $TARGET_SERVER "cd $TARGET_FOLDER && rm -rf *.zip"
